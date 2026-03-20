@@ -3,3 +3,9 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+
+header > .actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+}
