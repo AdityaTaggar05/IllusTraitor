@@ -6,7 +6,6 @@ body {
   margin: 0;
 }
 
-header {
-  border-bottom: 0.15rem solid;
-  padding: 0 1rem 0 1rem;
+.main-layout {
+  display: flex;
 }
