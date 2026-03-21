@@ -66,7 +66,7 @@
       </div>
 
       <!-- Main Canvas -->
-      <div class="canvas"></div>
+      <canvas class="canvas"></canvas>
 
       <!-- Floating Sidebar -->
       <div class="sidebar active">
@@ -76,24 +76,25 @@
 
         <!-- Dynamic Content -->
         <div class="content">
-          <div class="option">
-            <label>Fill:</label>
-            <input type="checkbox" id="fillToggle" />
-          </div>
-          <div class="option">
-            <label>Outline Color:</label>
-            <input type="color" id="outlineColor" />
-          </div>
-          <div class="option">
-            <label>Stroke Width: </label>
-            <input type="range" min="1" max="4" step="1" id="slider" />
-            <span class="tooltip" id="tooltip">50</span>
-          </div>
+          <!--<div class="option">-->
+          <!--<label>Fill:</label>-->
+          <!--<input type="checkbox" id="fillToggle" />-->
+          <!--</div>-->
+          <!--<div class="option">-->
+          <!--<label>Outline Color:</label>-->
+          <!--<input type="color" id="outlineColor" />-->
+          <!--</div>-->
+          <!--<div class="option">-->
+          <!--<label>Stroke Width: </label>-->
+          <!--<input type="range" min="1" max="4" step="1" id="slider" />-->
+          <!--<span class="tooltip" id="tooltip">50</span>-->
+          <!--</div>-->
         </div>
       </div>
     </div>
 
     <script src="components/toolbar/toolbar.js"></script>
     <script src="components/sidebar/sidebar.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>

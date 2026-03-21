@@ -21,6 +21,7 @@ body {
 }
 
 .canvas {
+  width: 96vw;
   background: #ffffff;
   flex: 1;
 }
