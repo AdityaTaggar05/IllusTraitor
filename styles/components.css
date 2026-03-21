@@ -65,3 +65,7 @@ input[type="color"] {
   inline-size: 2em; /* Sets the width */
   block-size: 2em; /* Sets the height */
 }
+
+input[type="range"] {
+  accent-color: var(--secondary);
+}
