@@ -18,3 +18,8 @@ body {
   flex-grow: 1;
   justify-items: stretch;
 }
+
+.canvas {
+  background: #ffffff;
+  flex-grow: 1;
+}

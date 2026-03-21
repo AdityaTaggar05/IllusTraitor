@@ -3,7 +3,11 @@ tools.forEach((tool) => {
   tool.addEventListener("click", () => {
     if (tool.classList.contains("active")) return;
 
-    tools.forEach((t) => t.classList.remove("active"));
-    tool.classList.add("active");
+    if (tool.getAttribute("data-action") == "collapse") {
+      document.querySelector(".toolbar").classList.remove("active");
+    } else {
+      tools.forEach((t) => t.classList.remove("active"));
+      tool.classList.add("active");
+    }
   });
 });
