@@ -4,6 +4,7 @@ export class Tool {
   }
 
   getSidebarOptions() { }
+  bindSidebarEvents(state) { }
   onMouseDown(e, ctx) { }
   onMouseMove(e, ctx) { }
   onMouseUp(e, ctx) { }
@@ -22,6 +23,7 @@ export class ToolManager {
       this.currentTool.onDeselect();
     }
 
+    this.state.currentTool = tool;
     this.currentTool = tool;
 
     if (this.currentTool.onSelect) {

@@ -8,12 +8,29 @@ export class PencilTool extends Tool {
 
   getSidebarOptions() {
     return `
-    <div class="option">
-      <label>Stroke Width:</label>
-      <input type="range" id="strokeWidth" min="1" max="8" class="slider"/>
-      <div class="tooltip" id="tooltip">1</div>
-    </div>
+      <h3>Pencil Tool</h3>
+      <div class="option">
+        <label>Stroke Width:</label>
+        <input type="range" id="strokeWidth" min="1" max="8" class="slider"/>
+        <div class="tooltip" id="tooltip">1</div>
+      </div>
+      <div class="option">
+        <label>Stroke Color:</label>
+        <input type="color" id="colorPicker" />
+      </div>
     `;
+  }
+
+  bindSidebarEvents() {
+    const strokeWidth = document.getElementById("strokeWidth");
+    strokeWidth.addEventListener("input", (e) => {
+      this.state.strokeWidth = Number(e.target.value);
+    });
+
+    const colorPicker = document.getElementById("colorPicker");
+    colorPicker.addEventListener("input", (e) => {
+      this.state.strokeColor = e.target.value;
+    });
   }
 
   onMouseDown(e, ctx) {
