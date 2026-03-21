@@ -16,6 +16,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
+  /* Animation */
+  transition: transform 0.1s ease;
+}
+
+.btn:hover {
+  transform: scale(1.06);
 }
 
 .btn:active {
