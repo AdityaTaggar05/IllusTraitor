@@ -11,21 +11,3 @@ export class Tool {
   onSelect() { }
   onDeselect() { }
 }
-
-export class ToolManager {
-  constructor() {
-    this.currentTool = null;
-  }
-
-  setTool(tool) {
-    if (this.currentTool?.onDeselect) {
-      this.currentTool.onDeselect();
-    }
-
-    this.currentTool = tool;
-
-    if (this.currentTool.onSelect) {
-      this.currentTool.onSelect();
-    }
-  }
-}

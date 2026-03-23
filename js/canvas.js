@@ -1,4 +1,4 @@
-export function setupCanvas(canvas, toolManager) {
+export function setupCanvas(canvas, stateManager) {
   const ctx = canvas.getContext("2d");
 
   // Handle DPI scaling
@@ -11,15 +11,15 @@ export function setupCanvas(canvas, toolManager) {
   ctx.lineCap = "round";
 
   canvas.addEventListener("mousedown", (e) => {
-    toolManager.currentTool?.onMouseDown(e, ctx);
+    stateManager.currentTool?.onMouseDown(e, ctx);
   });
 
   canvas.addEventListener("mousemove", (e) => {
-    toolManager.currentTool?.onMouseMove(e, ctx);
+    stateManager.currentTool?.onMouseMove(e, ctx);
   });
 
   canvas.addEventListener("mouseup", (e) => {
-    toolManager.currentTool?.onMouseUp(e, ctx);
+    stateManager.currentTool?.onMouseUp(e, ctx);
   });
 
   return ctx;

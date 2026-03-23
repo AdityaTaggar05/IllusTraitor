@@ -14,18 +14,18 @@ function selectTool(tool, tools) {
 const pencil = new PencilTool();
 const rectangle = new RectangleTool();
 
-export function setupToolbarEvents(tools, toolManager) {
+export function setupToolbarEvents(tools, stateManager) {
   tools.forEach((tool) => {
     tool.addEventListener("click", () => {
       const name = tool.getAttribute("data-action");
 
       switch (name) {
         case "pencil":
-          toolManager.setTool(pencil);
+          stateManager.setTool(pencil);
           selectTool(tool, tools);
           break;
         case "rectangle":
-          toolManager.setTool(rectangle);
+          stateManager.setTool(rectangle);
           selectTool(tool, tools);
           break;
         case "undo":
@@ -33,7 +33,7 @@ export function setupToolbarEvents(tools, toolManager) {
           break;
       }
 
-      renderSidebar(toolManager.currentTool);
+      renderSidebar(stateManager.currentTool);
     });
   });
 }
