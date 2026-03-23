@@ -18,20 +18,20 @@ export class RectangleTool extends Tool {
 
       <div class="option">
         <label>Fill:</label>
-        <input type="checkbox" id="fillToggle" />
+        <input type="checkbox" id="fillToggle" ${this.state.fill ? "checked" : ""} />
       </div>
       <div class="option">
         <label>Fill Color:</label>
-        <input type="color" id="fillPicker" />
+        <input type="color" id="fillPicker" value="${this.state.fillColor}" />
       </div>
       <div class="option">
         <label>Stroke Width:</label>
-        <input type="range" id="strokeWidth" min="0" max="10" value="5" />
+        <input type="range" id="strokeWidth" min="0" max="10" value="${this.state.strokeWidth}" />
         <div class="tooltip"></div>
       </div>
       <div class="option">
         <label>Stroke Color:</label>
-        <input type="color" id="strokePicker" />
+        <input type="color" id="strokePicker" value="${this.state.strokeColor}" />
       </div>
     `;
   }
