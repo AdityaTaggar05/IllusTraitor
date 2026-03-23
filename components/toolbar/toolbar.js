@@ -11,6 +11,9 @@ function selectTool(tool, tools) {
   document.querySelector(".sidebar").classList.add("active");
 }
 
+const pencil = new PencilTool();
+const rectangle = new RectangleTool();
+
 export function setupToolbarEvents(tools, toolManager) {
   tools.forEach((tool) => {
     tool.addEventListener("click", () => {
@@ -18,11 +21,11 @@ export function setupToolbarEvents(tools, toolManager) {
 
       switch (name) {
         case "pencil":
-          toolManager.setTool(new PencilTool());
+          toolManager.setTool(pencil);
           selectTool(tool, tools);
           break;
         case "rectangle":
-          toolManager.setTool(new RectangleTool());
+          toolManager.setTool(rectangle);
           selectTool(tool, tools);
           break;
         case "undo":

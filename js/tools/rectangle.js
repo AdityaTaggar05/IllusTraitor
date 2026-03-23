@@ -78,9 +78,11 @@ export class RectangleTool extends Tool {
     let x = Math.min(e.offsetX, this.x);
     let y = Math.min(e.offsetY, this.y);
 
-    ctx.lineWidth = this.state.strokeWidth;
-    ctx.strokeStyle = this.state.strokeColor;
-    ctx.strokeRect(x, y, width, height);
+    if (this.state.strokeWidth > 0) {
+      ctx.lineWidth = this.state.strokeWidth;
+      ctx.strokeStyle = this.state.strokeColor;
+      ctx.strokeRect(x, y, width, height);
+    }
 
     if (this.state.fill) {
       ctx.fillStyle = this.state.fillColor;

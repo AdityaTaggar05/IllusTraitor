@@ -14,12 +14,12 @@ export class PencilTool extends Tool {
       <h3>Pencil Tool</h3>
       <div class="option">
         <label>Stroke Width:</label>
-        <input type="range" id="strokeWidth" min="1" max="8"/>
+        <input type="range" id="strokeWidth" min="1" max="8" value="${this.state.strokeWidth}"/>
         <div class="tooltip"></div>
       </div>
       <div class="option">
         <label>Stroke Color:</label>
-        <input type="color" id="colorPicker" />
+        <input type="color" id="strokeColor" value="${this.state.strokeColor}" />
       </div>
     `;
   }
@@ -30,8 +30,8 @@ export class PencilTool extends Tool {
       this.state.strokeWidth = Number(e.target.value);
     });
 
-    const colorPicker = document.getElementById("colorPicker");
-    colorPicker.addEventListener("input", (e) => {
+    const strokeColor = document.getElementById("strokeColor");
+    strokeColor.addEventListener("input", (e) => {
       this.state.strokeColor = e.target.value;
     });
   }
