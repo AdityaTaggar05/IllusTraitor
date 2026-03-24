@@ -6,7 +6,9 @@
   /* Border Styling */
   border-radius: 6px;
   border-width: 2px 4px 4px 2px;
+  border-style: solid;
   border-color: var(--outline);
+  box-shadow: none;
 
   padding: 0 0.8vw;
   height: 4vh;

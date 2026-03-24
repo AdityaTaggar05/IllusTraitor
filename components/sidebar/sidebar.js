@@ -20,4 +20,8 @@ document
       items[1].classList.remove("active");
       items[0].classList.add("active");
     }
+
+    const root = document.documentElement;
+    const isDark = root.getAttribute("data-theme") === "dark";
+    root.setAttribute("data-theme", isDark ? "light" : "dark");
   });
