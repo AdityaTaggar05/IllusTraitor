@@ -1,11 +1,48 @@
-const tools = document.querySelectorAll(".tool");
-tools.forEach((tool) => {
-  tool.addEventListener("click", () => {
-    if (!tool.classList.contains("active")) {
-      tools.forEach((t) => t.classList.remove("active"));
-      tool.classList.add("active");
-    }
+import { renderSidebar } from "../../js/sidebar.js";
+import { CircleTool } from "../../js/tools/circle.js";
+import { PencilTool } from "../../js/tools/pencil.js";
+import { RectangleTool } from "../../js/tools/rectangle.js";
 
-    document.querySelector(".sidebar").classList.add("active");
+function selectTool(tool, tools) {
+  if (!tool.classList.contains("active")) {
+    tools.forEach((t) => t.classList.remove("active"));
+    tool.classList.add("active");
+  }
+
+  document.querySelector(".sidebar").classList.add("active");
+}
+
+export function setupToolbarEvents(tools, stateManager) {
+  const pencil = new PencilTool(stateManager);
+  const rectangle = new RectangleTool(stateManager);
+  const circle = new CircleTool(stateManager);
+
+  tools.forEach((tool) => {
+    tool.addEventListener("click", () => {
+      const name = tool.getAttribute("data-action");
+
+      switch (name) {
+        case "pencil":
+          stateManager.setTool(pencil);
+          selectTool(tool, tools);
+          break;
+        case "rectangle":
+          stateManager.setTool(rectangle);
+          selectTool(tool, tools);
+          break;
+        case "circle":
+          stateManager.setTool(circle);
+          selectTool(tool, tools);
+          break;
+        case "undo":
+          stateManager.undo();
+          break;
+        case "redo":
+          stateManager.redo();
+          break;
+      }
+
+      renderSidebar(stateManager.currentTool);
+    });
   });
-});
+}

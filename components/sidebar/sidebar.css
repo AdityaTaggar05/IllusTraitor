@@ -35,6 +35,12 @@
   gap: 1rem;
 }
 
+.sidebar .content h3 {
+  position: absolute;
+  top: 0;
+  left: 3vw;
+}
+
 .option {
   display: inline-flex;
   justify-content: start;
@@ -48,4 +54,5 @@
   padding: 4px 8px;
   font-size: 0.8em;
   border-radius: 4px;
+  border: 1.5px solid var(--outline);
 }
