@@ -47,7 +47,7 @@ export function setupToolbarEvents(tools, stateManager) {
           selectTool(tool, tools);
           break;
         case "undo":
-          stateManager.currentTool.onUndo();
+          stateManager.currentTool?.onUndo();
           stateManager.undo();
           break;
         case "redo":
@@ -55,7 +55,8 @@ export function setupToolbarEvents(tools, stateManager) {
           break;
       }
 
-      renderSidebar(stateManager.currentTool);
+      if (stateManager.currentTool != null)
+        renderSidebar(stateManager.currentTool);
     });
   });
 }
