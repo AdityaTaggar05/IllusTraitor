@@ -45,7 +45,6 @@ export class EllipseElement extends Element {
     ctx.closePath();
 
     if (this.isSelected) {
-      console.log("SELECTED");
       ctx.beginPath();
       ctx.setLineDash([2, 4]);
       ctx.lineWidth = 1;
