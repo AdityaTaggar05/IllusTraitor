@@ -27,6 +27,14 @@ export class PencilElement extends Element {
     return false;
   }
 
+  translate(dx, dy) {
+    // TODO: Fix Bug here
+    for (let i = 0; i < this.properties.path.length; i++) {
+      this.properties.path[i][0] += dx;
+      this.properties.path[i][1] += dy;
+    }
+  }
+
   draw(ctx) {
     // Apply styling
     ctx.strokeStyle = this.properties.strokeColor;

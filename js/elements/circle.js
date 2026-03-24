@@ -13,6 +13,11 @@ export class CircleElement extends Element {
     return dx * dx + dy * dy <= 1;
   }
 
+  translate(dx, dy) {
+    this.properties.x += dx;
+    this.properties.y += dy;
+  }
+
   draw(ctx) {
     ctx.beginPath();
 

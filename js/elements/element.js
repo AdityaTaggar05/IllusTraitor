@@ -5,6 +5,7 @@ export class Element {
 
   draw(ctx) { }
   isTargetted(x, y, ctx) { }
+  translate(x, y) { }
 
   toJson() {
     return {

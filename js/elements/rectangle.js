@@ -17,6 +17,11 @@ export class RectangleElement extends Element {
     return false;
   }
 
+  translate(dx, dy) {
+    this.properties.x += dx;
+    this.properties.y += dy;
+  }
+
   draw(ctx) {
     if (this.properties.strokeWidth > 0) {
       ctx.lineWidth = this.properties.strokeWidth;

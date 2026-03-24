@@ -28,6 +28,13 @@ export class TriangleElement extends Element {
     return u >= 0 && v >= 0 && u + v < 1;
   }
 
+  translate(dx, dy) {
+    for (let i = 0; i < this.properties.path.length; i++) {
+      this.properties.path[i][0] += dx;
+      this.properties.path[i][1] += dy;
+    }
+  }
+
   draw(ctx) {
     ctx.beginPath();
 
