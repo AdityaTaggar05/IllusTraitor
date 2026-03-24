@@ -12,11 +12,29 @@ export class StateManager {
     this.undoneElements = [];
 
     this.loadElements();
+    this.loadTheme();
   }
 
   bindContext(ctx) {
     this.ctx = ctx;
     this.render();
+  }
+
+  loadTheme() {
+    const theme = sessionStorage.getItem("theme");
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+
+      const modes = document.getElementsByClassName("theme-mode");
+
+      if (theme == "dark") {
+        modes[1].classList.remove("active");
+        modes[0].classList.add("active");
+      } else {
+        modes[0].classList.remove("active");
+        modes[1].classList.add("active");
+      }
+    }
   }
 
   loadElements() {
