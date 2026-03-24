@@ -7,9 +7,9 @@ export class PencilElement extends Element {
     ctx.lineWidth = this.properties.strokeWidth;
 
     ctx.beginPath();
-    ctx.moveTo(this.properties.x, this.properties.y);
+    ctx.moveTo(this.properties.path[0][0], this.properties.path[0][1]);
 
-    for (const point of this.properties.path) {
+    for (const point of this.properties.path.slice(1)) {
       ctx.lineTo(point[0], point[1]);
       ctx.stroke();
     }
