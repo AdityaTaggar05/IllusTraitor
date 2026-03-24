@@ -3,7 +3,7 @@ import { setupCanvas } from "./canvas.js";
 import { setupToolbarEvents } from "../components/toolbar/toolbar.js";
 
 // Setup tool manager and canvas with defaults
-const canvas = document.querySelector(".canvas");
+const canvas = document.querySelector("canvas");
 const stateManager = new StateManager();
 setupCanvas(canvas, stateManager);
 
