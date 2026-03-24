@@ -24,6 +24,14 @@ export class TextTool extends Tool {
           type: "color",
           value: this.state.color,
         },
+        {
+          label: "Font Size:",
+          id: "fontSize",
+          type: "range",
+          min: 1,
+          max: 40,
+          value: this.state.fontSize,
+        },
       ],
     };
   }
@@ -32,6 +40,11 @@ export class TextTool extends Tool {
     const colorPicker = document.querySelector("#colorPicker");
     colorPicker.addEventListener("input", (e) => {
       this.state.color = e.target.value;
+    });
+
+    const fontSize = document.querySelector("#fontSize");
+    fontSize.addEventListener("input", (e) => {
+      this.state.fontSize = Number(e.target.value);
     });
   }
 
@@ -65,7 +78,7 @@ export class TextTool extends Tool {
     textarea.style.top = `${e.offsetY}px`;
     textarea.style.fontSize = `${this.state.fontSize || 20}px`;
     textarea.style.fontFamily = "Arial";
-    textarea.style.color = this.state.strokeColor;
+    textarea.style.color = this.state.color;
     textarea.style.border = "1px dashed #aaa";
     textarea.style.background = "transparent";
     textarea.style.outline = "none";
