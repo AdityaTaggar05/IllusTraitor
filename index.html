@@ -43,6 +43,48 @@
     <div class="workspace">
       <!-- Left Toolbar -->
       <div class="toolbar">
+        <!-- Select Tool -->
+        <button class="tool" data-action="select">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 2L4 17L8 13L11 20L13.5 19L10.5 12L16 12Z"
+              fill="currentColor"
+              stroke="none"
+            />
+            <path d="M4 2L4 17L8 13L11 20L13.5 19L10.5 12L16 12Z" />
+          </svg>
+        </button>
+
+        <!-- Eraser Tool -->
+        <button class="tool" data-action="eraser">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 7L13 20H6L3 15L11 2Z" />
+            <line x1="7.5" y1="17.5" x2="15" y2="4.5" />
+            <line x1="6" y1="20" x2="22" y2="20" />
+          </svg>
+        </button>
+
+        <!-- Pencil Tool -->
         <button class="tool" data-action="pencil">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +102,61 @@
             <line x1="5.5" y1="18.5" x2="7" y2="17" />
           </svg>
         </button>
+
+        <!-- Square Tool -->
+        <button class="tool" data-action="square">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3.5" y="3.5" width="17" height="17" rx="1" />
+            <rect
+              x="2"
+              y="2"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="19"
+              y="2"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="2"
+              y="19"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="19"
+              y="19"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+        </button>
+
+        <!-- Rectangle Tool -->
         <button class="tool" data-action="rectangle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -111,6 +208,52 @@
             />
           </svg>
         </button>
+
+        <!-- Triangle Tool -->
+        <button class="tool" data-action="triangle">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polygon points="12,3 21.5,20.5 2.5,20.5" />
+            <rect
+              x="10.5"
+              y="1.5"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="20"
+              y="19"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="1"
+              y="19"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+        </button>
+
+        <!-- Circle Tool -->
         <button class="tool" data-action="circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -162,6 +305,61 @@
             />
           </svg>
         </button>
+
+        <!-- Ellipse Tool -->
+        <button class="tool" data-action="ellipse">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <ellipse cx="12" cy="12" rx="9.5" ry="7" />
+            <rect
+              x="10.5"
+              y="3.5"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="10.5"
+              y="17.5"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="1"
+              y="10.5"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+            <rect
+              x="20"
+              y="10.5"
+              width="3"
+              height="3"
+              rx="0.5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+        </button>
+
+        <!-- Text Tool -->
         <button class="tool" data-action="text">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -182,6 +380,8 @@
           </svg>
         </button>
         <div class="spacer"></div>
+
+        <!-- Undo -->
         <button class="tool" data-action="undo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -200,6 +400,8 @@
             <polyline points="2,5 4,8 7.5,6.5" />
           </svg>
         </button>
+
+        <!-- Redo -->
         <button class="tool" data-action="redo">
           <svg
             xmlns="http://www.w3.org/2000/svg"
