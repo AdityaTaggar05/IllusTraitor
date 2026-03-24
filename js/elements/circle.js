@@ -43,12 +43,12 @@ export class CircleElement extends Element {
 
     if (this.isSelected) {
       ctx.beginPath();
-      ctx.setLineDash([1, 6]);
+      ctx.setLineDash([2, 4]);
       ctx.lineWidth = 1;
       ctx.arc(
         this.properties.x,
         this.properties.y,
-        this.properties.radius * 1.1,
+        this.properties.radius + 8,
         0,
         Math.PI * 2,
       );
