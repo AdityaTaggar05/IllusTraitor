@@ -25,6 +25,7 @@ export class RectangleElement extends Element {
   draw(ctx) {
     if (this.properties.strokeWidth > 0) {
       ctx.lineWidth = this.properties.strokeWidth;
+      ctx.setLineDash([0, 0]);
       ctx.strokeStyle = this.properties.strokeColor;
       ctx.strokeRect(
         this.properties.x,
@@ -42,6 +43,17 @@ export class RectangleElement extends Element {
         this.properties.y + this.properties.strokeWidth / 2,
         this.properties.width - this.properties.strokeWidth,
         this.properties.height - this.properties.strokeWidth,
+      );
+    }
+
+    if (this.isSelected) {
+      ctx.setLineDash([2, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(
+        this.properties.x - 6,
+        this.properties.y - 6,
+        this.properties.width + 12,
+        this.properties.height + 12,
       );
     }
   }

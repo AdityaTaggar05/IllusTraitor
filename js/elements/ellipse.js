@@ -23,6 +23,7 @@ export class EllipseElement extends Element {
 
     if (this.properties.strokeWidth > 0) {
       ctx.lineWidth = this.properties.strokeWidth;
+      ctx.setLineDash([0, 0]);
       ctx.strokeStyle = this.properties.strokeColor;
       ctx.ellipse(
         this.properties.x,
@@ -38,16 +39,26 @@ export class EllipseElement extends Element {
 
     if (this.properties.fill) {
       ctx.fillStyle = this.properties.fillColor;
+      ctx.fill();
+    }
+
+    ctx.closePath();
+
+    if (this.isSelected) {
+      ctx.beginPath();
+      ctx.setLineDash([2, 4]);
+      ctx.lineWidth = 1;
       ctx.ellipse(
         this.properties.x,
         this.properties.y,
-        this.properties.radiusX,
-        this.properties.radiusY,
+        this.properties.radiusX + 8,
+        this.properties.radiusY + 8,
         0,
         0,
         Math.PI * 2,
       );
-      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
     }
   }
 }

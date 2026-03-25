@@ -8,6 +8,7 @@ import { TextElement } from "./elements/text.js";
 export class StateManager {
   constructor() {
     this.ctx = null;
+    this.canvasColor = "#ffffff";
     this.currentTool = null;
     this.elements = [];
     this.undoneElements = [];
@@ -22,7 +23,7 @@ export class StateManager {
   }
 
   loadTheme() {
-    const theme = sessionStorage.getItem("theme");
+    const theme = localStorage.getItem("theme");
     if (theme) {
       document.documentElement.setAttribute("data-theme", theme);
 
@@ -97,6 +98,16 @@ export class StateManager {
     this.storeElements();
   }
 
+  remove(element) {
+    this.elements = this.elements.filter((elem) => elem !== element);
+    this.undoneElements.push(element);
+
+    console.log(this.elements, this.undoneElements);
+
+    this.render();
+    this.storeElements();
+  }
+
   undo() {
     if (this.elements.length > 0) {
       this.undoneElements.push(this.elements.pop());
@@ -131,6 +142,9 @@ export class StateManager {
 
   render() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    this.ctx.fillStyle = this.canvasColor;
+    this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+
     for (const element of this.elements) {
       element.draw(this.ctx);
     }
