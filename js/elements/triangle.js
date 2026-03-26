@@ -76,7 +76,6 @@ export class TriangleElement extends Element {
 
       ctx.setLineDash([2, 4]);
       ctx.lineWidth = 1;
-      console.log(minX, minY, maxX - minX, maxY - minY);
       ctx.strokeRect(minX, minY, maxX - minX, maxY - minY);
       ctx.setLineDash([0, 0]);
     }
