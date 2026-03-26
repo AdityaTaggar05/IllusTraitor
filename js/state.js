@@ -43,11 +43,11 @@ export class StateManager {
     let storedCanvasColor = sessionStorage.getItem("canvasColor");
     if (storedCanvasColor) {
       this.canvasColor = storedCanvasColor;
-
-      document
-        .getElementById("canvas-color")
-        .setAttribute("value", storedCanvasColor);
     }
+
+    document
+      .getElementById("canvas-color")
+      .setAttribute("value", this.canvasColor);
 
     let storedElems = sessionStorage.getItem("elements");
     if (storedElems) {
