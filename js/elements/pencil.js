@@ -40,14 +40,25 @@ export class PencilElement extends Element {
     ctx.strokeStyle = this.properties.strokeColor;
     ctx.lineWidth = this.properties.strokeWidth;
 
+    if (this.properties.path.length < 2) return;
+
     ctx.beginPath();
     ctx.moveTo(this.properties.path[0][0], this.properties.path[0][1]);
 
-    for (const point of this.properties.path.slice(1)) {
-      ctx.lineTo(point[0], point[1]);
-      ctx.stroke();
+    for (let i = 1; i < this.properties.path.length - 1; i++) {
+      const midX =
+        (this.properties.path[i][0] + this.properties.path[i + 1][0]) / 2;
+      const midY =
+        (this.properties.path[i][1] + this.properties.path[i + 1][1]) / 2;
+
+      ctx.quadraticCurveTo(
+        this.properties.path[i][0],
+        this.properties.path[i][1],
+        midX,
+        midY,
+      );
     }
 
-    ctx.closePath();
+    ctx.stroke();
   }
 }

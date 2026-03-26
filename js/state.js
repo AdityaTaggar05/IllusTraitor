@@ -13,8 +13,8 @@ export class StateManager {
     this.elements = [];
     this.undoneElements = [];
 
-    this.loadCanvas();
     this.loadTheme();
+    this.loadCanvas();
   }
 
   bindContext(ctx) {
@@ -142,8 +142,8 @@ export class StateManager {
   clear() {
     this.elements = [];
     this.undoneElements = [];
-    this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
+    this.render();
     this.storeElements();
   }
 
