@@ -7,8 +7,8 @@
   z-index: 10;
 
   /* Sizing */
-  height: 60vh;
-  width: 50vw;
+  height: 70vh;
+  width: 45vw;
 
   /* Layout */
   display: flex;
@@ -58,6 +58,7 @@
 
   #help-dialog {
     font-size: 0.8rem;
+    width: 80vw;
   }
 
   .keybinds-container {
