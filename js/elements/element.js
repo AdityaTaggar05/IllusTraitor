@@ -5,6 +5,9 @@ export class Element {
     this.hidden = false;
   }
 
+  getBounds() { }
+  resize(handle, dx, dy) { }
+
   draw(ctx) { }
   isTargetted(x, y, ctx) { }
   translate(x, y) { }

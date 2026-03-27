@@ -30,7 +30,19 @@ export function setupKeybinds(stateManager) {
     // Ctrl/Command + H
     if ((e.ctrlKey || e.metaKey) && e.code === "KeyH") {
       e.preventDefault();
-      document.querySelector("#help-btn").dispatchEvent(new Event("click"));
+      const dialog = document.querySelector("#help-dialog");
+
+      if (dialog.classList.contains("active")) {
+        dialog.classList.remove("active");
+      } else {
+        dialog.classList.add("active");
+      }
+    }
+
+    // Ctrl/Command + M
+    if ((e.ctrlKey || e.metaKey) && e.code === "KeyM") {
+      e.preventDefault();
+      document.querySelector(".theme-toggle").dispatchEvent(new Event("click"));
     }
 
     // Backspace / Del
@@ -43,6 +55,17 @@ export function setupKeybinds(stateManager) {
         stateManager.clear();
       } else {
         stateManager.removeSelected();
+      }
+    }
+
+    // |
+    if (e.key === "|") {
+      const sidebar = document.querySelector(".sidebar");
+
+      if (sidebar.classList.contains("active")) {
+        sidebar.classList.remove("active");
+      } else {
+        sidebar.classList.add("active");
       }
     }
 

@@ -35,11 +35,79 @@ export class PencilElement extends Element {
     return false;
   }
 
+  getBounds() {
+    return {
+      x: this.minX,
+      y: this.minY,
+      w: this.maxX - this.minX,
+      h: this.maxY - this.minY,
+    };
+  }
+
   translate(dx, dy) {
     for (let i = 0; i < this.properties.path.length; i++) {
       this.properties.path[i][0] += dx;
       this.properties.path[i][1] += dy;
     }
+
+    this.computeEdges = true;
+  }
+
+  resize(handle, dx, dy) {
+    const b = this.getBounds();
+    if (!b) return;
+    const MIN = 4;
+
+    let newX = b.x,
+      newY = b.y,
+      newW = b.w,
+      newH = b.h;
+
+    if (handle === "tl") {
+      newX += dx;
+      newY += dy;
+      newW -= dx;
+      newH -= dy;
+    }
+    if (handle === "tm") {
+      newY += dy;
+      newH -= dy;
+    }
+    if (handle === "tr") {
+      newY += dy;
+      newW += dx;
+      newH -= dy;
+    }
+    if (handle === "ml") {
+      newX += dx;
+      newW -= dx;
+    }
+    if (handle === "mr") {
+      newW += dx;
+    }
+    if (handle === "bl") {
+      newX += dx;
+      newW -= dx;
+      newH += dy;
+    }
+    if (handle === "bm") {
+      newH += dy;
+    }
+    if (handle === "br") {
+      newW += dx;
+      newH += dy;
+    }
+
+    newW = Math.max(newW, MIN);
+    newH = Math.max(newH, MIN);
+
+    const scaleX = b.w > 0 ? newW / b.w : 1;
+    const scaleY = b.h > 0 ? newH / b.h : 1;
+
+    this.properties.path = this.properties.path.map(([px, py]) => [
+      newX + (px - b.x) * scaleX,
+      newY + (py - b.y) * scaleY,
+    ]);
 
     this.computeEdges = true;
   }
@@ -92,17 +160,5 @@ export class PencilElement extends Element {
     if (this.computeEdges) this.computeEdges = false;
 
     ctx.stroke();
-
-    if (this.isSelected) {
-      ctx.lineWidth = 1;
-      ctx.setLineDash([2, 4]);
-      ctx.strokeRect(
-        this.minX,
-        this.minY,
-        this.maxX - this.minX,
-        this.maxY - this.minY,
-      );
-      ctx.setLineDash([0, 0]);
-    }
   }
 }

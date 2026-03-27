@@ -17,6 +17,64 @@ export class RectangleElement extends Element {
     return false;
   }
 
+  getBounds() {
+    return {
+      x: this.properties.x,
+      y: this.properties.y,
+      w: this.properties.width,
+      h: this.properties.height,
+    };
+  }
+
+  resize(handle, dx, dy) {
+    const p = this.properties;
+    switch (handle) {
+      case "tl":
+        p.x += dx;
+        p.y += dy;
+        p.width -= dx;
+        p.height -= dy;
+        break;
+      case "tm":
+        p.y += dy;
+        p.height -= dy;
+        break;
+      case "tr":
+        p.y += dy;
+        p.width += dx;
+        p.height -= dy;
+        break;
+      case "ml":
+        p.x += dx;
+        p.width -= dx;
+        break;
+      case "mr":
+        p.width += dx;
+        break;
+      case "bl":
+        p.x += dx;
+        p.width -= dx;
+        p.height += dy;
+        break;
+      case "bm":
+        p.height += dy;
+        break;
+      case "br":
+        p.width += dx;
+        p.height += dy;
+        break;
+    }
+    // Prevent negative dimensions
+    if (p.width < 1) {
+      if (handle.includes("l")) p.x -= 1 - p.width;
+      p.width = 1;
+    }
+    if (p.height < 1) {
+      if (handle.includes("t")) p.y -= 1 - p.height;
+      p.height = 1;
+    }
+  }
+
   translate(dx, dy) {
     this.properties.x += dx;
     this.properties.y += dy;
@@ -43,18 +101,6 @@ export class RectangleElement extends Element {
         this.properties.width - this.properties.strokeWidth,
         this.properties.height - this.properties.strokeWidth,
       );
-    }
-
-    if (this.isSelected) {
-      ctx.setLineDash([2, 4]);
-      ctx.lineWidth = 1;
-      ctx.strokeRect(
-        this.properties.x - 6,
-        this.properties.y - 6,
-        this.properties.width + 12,
-        this.properties.height + 12,
-      );
-      ctx.setLineDash([0, 0]);
     }
   }
 }

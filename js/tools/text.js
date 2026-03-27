@@ -53,7 +53,7 @@ export class TextTool extends Tool {
     });
   }
 
-  changeText(x, y) {
+  changeText(x, y, ctx) {
     const value = this.input.value.trim();
 
     if (value !== "") {
@@ -61,14 +61,25 @@ export class TextTool extends Tool {
 
       if (!this.editing) {
         let element = new TextElement({ ...this.state });
+        const metrics = ctx.measureText(value);
+
         element.properties.x = x;
-        element.properties.y = y;
+        element.properties.y = y - metrics.actualBoundingBoxAscent;
         element.properties.text = value;
+
+        element.properties.width = metrics.width;
+        element.properties.height =
+          metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
 
         this.stateManager.add(element);
         this.stateManager.selectLastElement();
       } else {
         this.editing.hidden = false;
+
+        const metrics = ctx.measureText(value);
+        if (this.editing.properties.width < metrics.width)
+          this.editing.properties.width = metrics.width;
+
         this.stateManager.render();
       }
 
@@ -104,7 +115,7 @@ export class TextTool extends Tool {
     this.input = textarea;
 
     textarea.addEventListener("blur", () => {
-      this.changeText(x, y);
+      this.changeText(x, y, ctx);
     });
   }
 

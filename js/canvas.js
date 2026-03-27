@@ -1,17 +1,4 @@
-function _offset(e, ctx) {
-  const rect = ctx.canvas.getBoundingClientRect();
-  e.offsetX -= rect.left;
-  e.offsetY -= rect.top;
-
-  return e;
-}
-function _handleTouch(e, ctx) {
-  e.preventDefault();
-  e.offsetX = e.touches[0].clientX;
-  e.offsetY = e.touches[0].clientY;
-
-  return _offset(e, ctx);
-}
+import { getHitHandle } from "./tools/handles.js";
 
 export function setupCanvas(canvas, stateManager) {
   const ctx = canvas.getContext("2d");
@@ -39,32 +26,42 @@ export function setupCanvas(canvas, stateManager) {
     stateManager.resizeCanvas(scaleX, scaleY);
   });
 
-  canvas.addEventListener("mousedown", (e) => {
+  canvas.addEventListener("pointerdown", (e) => {
     stateManager.currentTool?.onMouseDown(e, ctx);
   });
 
-  canvas.addEventListener("touchstart", (e) => {
-    e = _handleTouch(e, ctx);
-    stateManager.currentTool?.onMouseDown(e, ctx);
-  });
+  canvas.addEventListener("pointermove", (e) => {
+    const tool = stateManager.currentTool;
+    if (tool?.selectedElement) {
+      const b = tool.selectedElement.getBounds?.();
+      if (b) {
+        const hit = getHitHandle(
+          e.offsetX,
+          e.offsetY,
+          b.x - 6,
+          b.y - 6,
+          b.w + 12,
+          b.h + 12,
+        );
+        const cursors = {
+          tl: "nw-resize",
+          tr: "ne-resize",
+          bl: "sw-resize",
+          br: "se-resize",
+          tm: "n-resize",
+          bm: "s-resize",
+          ml: "w-resize",
+          mr: "e-resize",
+        };
+        canvas.style.cursor = hit ? cursors[hit] : "default";
+      }
+    }
 
-  canvas.addEventListener("mousemove", (e) => {
     stateManager.currentTool?.onMouseMove(e, ctx);
   });
 
-  canvas.addEventListener("touchmove", (e) => {
-    e = _handleTouch(e, ctx);
-    stateManager.currentTool?.onMouseMove(e, ctx);
-  });
-
-  canvas.addEventListener("mouseup", (e) => {
+  canvas.addEventListener("pointerup", (e) => {
     stateManager.currentTool?.onMouseUp(e, ctx);
-  });
-
-  canvas.addEventListener("touchend", (e) => {
-    e.offsetX = e.changedTouches[0].clientX;
-    e.offsetY = e.changedTouches[0].clientY;
-    stateManager.currentTool?.onMouseUp(_offset(e, ctx), ctx);
   });
 
   return ctx;
