@@ -146,7 +146,7 @@ export class StateManager {
 
   selectLastElement() {
     this.setTool("select");
-    this.currentTool.select(-1);
+    this.currentTool.select(-1, this.ctx);
   }
 
   remove(element) {

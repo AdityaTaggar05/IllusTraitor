@@ -35,6 +35,15 @@ export class PencilElement extends Element {
     return false;
   }
 
+  getBounds() {
+    return {
+      x: this.minX,
+      y: this.minY,
+      w: this.maxX - this.minX,
+      h: this.maxY - this.minY,
+    };
+  }
+
   translate(dx, dy) {
     for (let i = 0; i < this.properties.path.length; i++) {
       this.properties.path[i][0] += dx;
@@ -92,17 +101,5 @@ export class PencilElement extends Element {
     if (this.computeEdges) this.computeEdges = false;
 
     ctx.stroke();
-
-    if (this.isSelected) {
-      ctx.lineWidth = 1;
-      ctx.setLineDash([2, 4]);
-      ctx.strokeRect(
-        this.minX,
-        this.minY,
-        this.maxX - this.minX,
-        this.maxY - this.minY,
-      );
-      ctx.setLineDash([0, 0]);
-    }
   }
 }

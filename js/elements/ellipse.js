@@ -13,6 +13,15 @@ export class EllipseElement extends Element {
     return dx * dx + dy * dy <= 1;
   }
 
+  getBounds() {
+    return {
+      x: this.properties.x - this.properties.radiusX,
+      y: this.properties.y - this.properties.radiusY,
+      w: this.properties.radiusX * 2,
+      h: this.properties.radiusY * 2,
+    };
+  }
+
   translate(dx, dy) {
     this.properties.x += dx;
     this.properties.y += dy;
@@ -42,23 +51,5 @@ export class EllipseElement extends Element {
     }
 
     ctx.closePath();
-
-    if (this.isSelected) {
-      ctx.beginPath();
-      ctx.setLineDash([2, 4]);
-      ctx.lineWidth = 1;
-      ctx.ellipse(
-        this.properties.x,
-        this.properties.y,
-        this.properties.radiusX + 8,
-        this.properties.radiusY + 8,
-        0,
-        0,
-        Math.PI * 2,
-      );
-      ctx.stroke();
-      ctx.closePath();
-      ctx.setLineDash([0, 0]);
-    }
   }
 }

@@ -6,6 +6,7 @@ import { EllipseTool } from "./ellipse.js";
 import { TriangleTool } from "./triangle.js";
 import { TextTool } from "./text.js";
 import { renderSidebar } from "../sidebar.js";
+import { drawHandles, getHitHandle } from "./handles.js";
 
 export class SelectTool extends Tool {
   constructor(stateManager) {
@@ -61,6 +62,25 @@ export class SelectTool extends Tool {
 
   onMouseDown(e, ctx) {
     this.mouseDown = true;
+
+    if (this.selectedElement) {
+      const b = this.selectedElement.getBounds();
+      if (b) {
+        const hit = getHitHandle(
+          e.offsetX,
+          e.offsetY,
+          b.x - 6,
+          b.y - 6,
+          b.w + 12,
+          b.h + 12,
+        );
+        if (hit) {
+          this.resizeHandle = hit;
+          return; // don't fall through to deselect/move logic
+        }
+      }
+    }
+
     if (this.selectedElement) {
       this.doubleClick = true;
 
@@ -74,12 +94,12 @@ export class SelectTool extends Tool {
     for (let i = this.stateManager.elements.length - 1; i >= 0; i--) {
       const elem = this.stateManager.elements[i];
       if (elem.isTargetted(e.offsetX, e.offsetY, ctx)) {
-        this.select(i);
+        this.select(i, ctx);
       }
     }
   }
 
-  select(index) {
+  select(index, ctx) {
     this.selectedElement = this.stateManager.elements.at(index);
     this.selectedIndex = index;
     this.selectedElement.isSelected = true;
@@ -87,6 +107,7 @@ export class SelectTool extends Tool {
     this.lastProperties = { ...this.selectedElement.properties };
 
     this.stateManager.render();
+    this.drawSelectionBorder(ctx);
 
     this.tool = null;
     switch (this.selectedElement.type) {
@@ -132,12 +153,25 @@ export class SelectTool extends Tool {
   }
 
   onMouseMove(e, ctx) {
+    // Handle resize
+    if (this.resizeHandle && this.selectedElement) {
+      const dx = e.offsetX - this.x;
+      const dy = e.offsetY - this.y;
+      this.selectedElement.resize(this.resizeHandle, dx, dy);
+      this.stateManager.render();
+      this.x = e.offsetX;
+      this.y = e.offsetY;
+      return;
+    }
+
+    // Handle translation
     if (this.selectedElement && this.mouseDown) {
       let dx = e.offsetX - this.x;
       let dy = e.offsetY - this.y;
 
       this.selectedElement.translate(dx, dy);
       this.stateManager.render();
+      this.drawSelectionBorder(ctx);
 
       if (this.doubleClick) this.doubleClick = false;
     }
@@ -148,6 +182,13 @@ export class SelectTool extends Tool {
 
   onMouseUp(e, ctx) {
     this.mouseDown = false;
+
+    if (this.resizeHandle) {
+      this.resizeHandle = null;
+      this.drawSelectionBorder(ctx);
+      this.stateManager.storeElements();
+      return;
+    }
 
     if (this.doubleClick) {
       this.doubleClick = false;
@@ -165,6 +206,25 @@ export class SelectTool extends Tool {
           { text: this.selectedElement.properties.text },
         );
       }
+    }
+  }
+
+  drawSelectionBorder(ctx) {
+    if (this.selectedElement) {
+      const b = this.selectedElement.getBounds();
+      ctx.setLineDash([2, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(b.x - 6, b.y - 6, b.w + 12, b.h + 12);
+      ctx.setLineDash([]);
+      drawHandles(
+        ctx,
+        b.x - 6,
+        b.y - 6,
+        b.w + 12,
+        b.h + 12,
+        this.stateManager.canvasColor,
+        this.selectedElement.properties.strokeColor,
+      );
     }
   }
 }

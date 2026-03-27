@@ -13,6 +13,15 @@ export class CircleElement extends Element {
     return dx * dx + dy * dy <= 1;
   }
 
+  getBounds() {
+    return {
+      x: this.properties.x - this.properties.radius,
+      y: this.properties.y - this.properties.radius,
+      w: 2 * this.properties.radius,
+      h: 2 * this.properties.radius,
+    };
+  }
+
   translate(dx, dy) {
     this.properties.x += dx;
     this.properties.y += dy;
@@ -39,21 +48,5 @@ export class CircleElement extends Element {
       ctx.fill();
     }
     ctx.closePath();
-
-    if (this.isSelected) {
-      ctx.beginPath();
-      ctx.setLineDash([2, 4]);
-      ctx.lineWidth = 1;
-      ctx.arc(
-        this.properties.x,
-        this.properties.y,
-        this.properties.radius + 8,
-        0,
-        Math.PI * 2,
-      );
-      ctx.stroke();
-      ctx.closePath();
-      ctx.setLineDash([0, 0]);
-    }
   }
 }
