@@ -121,9 +121,14 @@ export class TextTool extends Tool {
 
     this.input = textarea;
 
-    textarea.addEventListener("blur", () => {
-      this.changeText(x, y, ctx);
-    });
+    const onOutsidePointer = (e) => {
+      if (!textarea.contains(e.target)) {
+        document.removeEventListener("pointerdown", onOutsidePointer, true);
+        this.changeText(x, y, ctx);
+      }
+    };
+
+    document.addEventListener("pointerdown", onOutsidePointer, true);
   }
 
   onMouseDown(e, ctx) {
