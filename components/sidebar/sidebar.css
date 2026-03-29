@@ -95,6 +95,7 @@
 
 @media only screen and (max-width: 600px) {
   .sidebar {
+    position: fixed;
     bottom: 0;
     height: 20vh;
     width: 100%;
@@ -110,13 +111,14 @@
   }
 
   .sidebar #close {
-    left: 1vw;
+    left: 4vw;
     top: -2vh;
   }
 
   .sidebar .floating-actions {
+    position: fixed;
     bottom: 21vh;
-    right: 1vw;
+    right: 4vw;
   }
 
   .sidebar .theme-toggle {
