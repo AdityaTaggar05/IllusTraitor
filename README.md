@@ -39,8 +39,6 @@ A lightweight, zero-dependency illustration app built with vanilla JavaScript an
 | `Ctrl/⌘ + H`           | Open help                  |
 | `Delete` / `Backspace` | Delete selected element    |
 | `Ctrl/⌘ + Delete`      | Clear canvas               |
-| `Enter`                | Commit text (in text tool) |
-| `Escape`               | Cancel text (in text tool) |
 
 ---
 
